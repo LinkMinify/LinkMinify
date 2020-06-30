@@ -2,7 +2,7 @@ import * as express from 'express';
 import { Application } from 'express';
 import * as mongoose from 'mongoose';
 import { ControllerBase } from './controllers/ControllerBase';
-import HomeController from 'controllers/HomeController';
+import HomeController from './controllers/HomeController';
 
 class App {
     public app: Application;
