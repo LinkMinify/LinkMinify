@@ -1,0 +1,19 @@
+{
+    "name": "linkminify",
+    "version": "1.0.0",
+    "description": "LinkMinify alows shortening of urls using a variety of short domains.",
+    "license": "MIT",
+    "dependencies": {
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "knex": "^0.21.1",
+        "pg": "^8.2.1"
+    },
+    "devDependencies": {
+        "@types/dotenv": "^8.2.0",
+        "@types/express": "^4.17.6",
+        "@types/node": "^14.0.14",
+        "ts-node": "^8.10.2",
+        "typescript": "^3.9.5"
+    }
+}
