@@ -43,6 +43,10 @@ class App {
                     useNewUrlParser: true
                 });
 
+                mongoose.connection.on('connected', () => {
+                    console.log('Connected to mongodb');
+                })
+
                 mongoose.connection.on('error', err => {
                     console.log(err);
                 })
