@@ -37,23 +37,21 @@ class App {
 
     private initDatabae() {
         // connect to mongo db
-        (async () => {
-            try {
-                await mongoose.connect(process.env.MONGOLAB_URI, {
-                    useNewUrlParser: true
-                });
+        try {
+            mongoose.connect(process.env.MONGODB_URI, {
+                useNewUrlParser: true
+            });
 
-                mongoose.connection.on('connected', () => {
-                    console.log('Connected to mongodb');
-                })
+            mongoose.connection.on('connected', () => {
+                console.log('Connected to mongodb');
+            })
 
-                mongoose.connection.on('error', err => {
-                    console.log(err);
-                })
-            } catch (error) {
-                console.log(error);
-            }
-        });
+            mongoose.connection.on('error', err => {
+                console.log(err);
+            })
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     /**
