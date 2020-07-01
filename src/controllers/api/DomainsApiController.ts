@@ -41,7 +41,7 @@ class DomainsApiController extends ControllerBase
                 domain: domain,
             });
 
-            await document.save();
+            document.save();
         } catch(error) {
             console.log(error);
         }
