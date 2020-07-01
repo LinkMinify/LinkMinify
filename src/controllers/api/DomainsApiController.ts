@@ -37,11 +37,10 @@ class DomainsApiController extends ControllerBase
 
         // finally, save the new domain to the database
         try {
-            let document = new DomainModel({ 
-                domain: domain,
-            });
-
-            document.save();
+            let document = new DomainModel();
+            document.domain = domain;
+            
+            await document.save();
         } catch(error) {
             console.log(error);
         }
