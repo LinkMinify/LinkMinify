@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { Application } from 'express';
+import { Application, Request, Response, NextFunction } from 'express';
 import * as mongoose from 'mongoose';
 import * as morgan from 'morgan';
 import { ControllerBase } from './controllers/ControllerBase';
@@ -60,6 +60,19 @@ class App {
     private registerMiddleware() {
         this.app.use(morgan('common'));
         this.app.use(express.json());
+
+        this.app.use((error, req: Request, res: Response, next: NextFunction) => {
+            if (error.status) {
+                res.status(error.status);
+            } else {
+                res.status(500);
+            }
+
+            res.json({
+                success: false,
+                result: error.message
+            });
+        });
     }
 
     private registerControllers() {
