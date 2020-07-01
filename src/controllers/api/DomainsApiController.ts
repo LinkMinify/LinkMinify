@@ -36,13 +36,17 @@ class DomainsApiController extends ControllerBase
         }
 
         // finally, save the new domain to the database
-        const domainModel = new DomainModel({ 
-            domain: domain,
-        });
+        try {
+            let document = new DomainModel({ 
+                domain: domain,
+            });
 
-        await domainModel.save();
+            await document.save();
+        } catch(error) {
+            console.log(error);
+        }
 
-        res.json({
+        return res.json({
             success: true,
             result: 'Successfully added domain ' + domain
         });

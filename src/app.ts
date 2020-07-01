@@ -1,6 +1,7 @@
 import * as express from 'express';
 import { Application } from 'express';
 import * as mongoose from 'mongoose';
+import * as morgan from 'morgan';
 import { ControllerBase } from './controllers/ControllerBase';
 import HomeController from './controllers/HomeController';
 
@@ -55,6 +56,7 @@ class App {
      * Register app middleware
      */
     private registerMiddleware() {
+        this.app.use(morgan('common'));
         this.app.use(express.json());
     }
 
