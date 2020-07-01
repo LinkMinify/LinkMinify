@@ -4,6 +4,9 @@ import * as mongoose from 'mongoose';
 import { ControllerBase } from './controllers/ControllerBase';
 import HomeController from './controllers/HomeController';
 
+// api routes
+import DomainsApiController from './controllers/api/DomainsApiController';
+
 class App {
     public app: Application;
     public port: string | number | boolean;
@@ -21,8 +24,11 @@ class App {
         // register middleware
         this.registerMiddleware();
 
-        // register controllers
+        // register frontend controllers
         this.registerControllers();
+
+        // register api controllers
+        this.registerApiControllers();
 
         // listen
         this.listen();
@@ -54,6 +60,10 @@ class App {
 
     private registerControllers() {
         this.registerController(new HomeController());
+    }
+
+    private registerApiControllers() {
+        this.registerController(new DomainsApiController());
     }
 
     private registerController(controller: ControllerBase) {
