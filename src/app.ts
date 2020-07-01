@@ -39,7 +39,7 @@ class App {
         // connect to mongo db
         (async () => {
             try {
-                await mongoose.connect(process.env.MONGODB_URI, {
+                await mongoose.connect(process.env.MONGOLAB_URI, {
                     useNewUrlParser: true
                 });
 
