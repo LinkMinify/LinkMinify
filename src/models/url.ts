@@ -1,20 +1,20 @@
 import { prop, index, getModelForClass } from '@typegoose/typegoose';
 
 export class LinkClicks {
-    date: Date;
-    clicks: number;
+    public date: Date;
+    public clicks: number;
 }
 
 @index({ slug: 1 }, { unique: true })
 export class Url {
     @prop({ required: true })
-    slug: string;
+    public slug: string;
 
     @prop({ required: true })
-    url: string;
+    public url: string;
 
     @prop()
-    link_clicks: LinkClicks[];
+    public link_clicks: LinkClicks[];
 }
 
 export const UrlModel = getModelForClass(Url);

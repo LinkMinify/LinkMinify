@@ -3,16 +3,16 @@ import { prop, getModelForClass, index } from '@typegoose/typegoose';
 @index({ domain: 1 }, { unique: true })
 export class Domain {
     @prop({ required: true })
-    domain: string;
+    public domain: string;
 
     @prop({ default: true })
-    enabled: boolean;
+    public enabled?: boolean;
 
     @prop({ default: Date.now })
-    createdAt: Date;
+    public createdAt?: Date;
 
     @prop({ default: Date.now })
-    updatedAt: Date;
+    public updatedAt?: Date;
 }
 
 export const DomainModel = getModelForClass(Domain);

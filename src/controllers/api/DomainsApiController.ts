@@ -30,20 +30,24 @@ class DomainsApiController extends ControllerBase
         try {
             await validator.validate({
                 domain: domain
-            });
+            }).then(async (valid) => {
+
+                // finally, save the new domain to the database
+                let document = await DomainModel.create({
+                    domain: valid.domain
+                });
+
+            });            
         } catch (error) {
             console.log(error);
         }
 
-        // finally, save the new domain to the database
-        try {
-            let document = new DomainModel();
-            document.domain = domain;
+        
+        /*try {
             
-            await document.save();
         } catch(error) {
             console.log(error);
-        }
+        }*/
 
         return res.json({
             success: true,
