@@ -27,6 +27,8 @@ class DomainsApiController extends ControllerBase
             })
         });
 
+        //let valid;
+
         try {
             await validator.validate({
                 domain: domain
@@ -39,7 +41,7 @@ class DomainsApiController extends ControllerBase
                         success: true,
                         result: 'Successfully added domain ' + domain
                     });
-                }).catch(err => { throw err; });
+                }).catch(() => { throw new Error(`Domain ${valid.domain} already exists.`); });
             });            
         } catch (error) {
             next(error);
