@@ -20,10 +20,10 @@ class DomainsApiController extends ControllerBase
         const validator = yup.object().shape({
             domain: yup.string().required(),
             createdAt: yup.date().default(() => {
-                return Date.now
+                return new Date();
             }),
             updatedAt: yup.date().default(() => {
-                return Date.now
+                return new Date();
             })
         });
 
@@ -41,6 +41,11 @@ class DomainsApiController extends ControllerBase
         });
 
         await domainModel.save();
+
+        res.json({
+            success: true,
+            result: 'Successfully added domain ' + domain
+        });
     }
 }
 
