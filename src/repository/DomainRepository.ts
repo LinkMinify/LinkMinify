@@ -29,7 +29,7 @@ export class DomainRepository {
     }
 
     public static update(domain: Domain) {
-        DomainModel.updateOne({ domain: domain.domain }, domain).exec();
+        DomainModel.updateOne({ domain: domain.domain }, domain);
     }
 
 }

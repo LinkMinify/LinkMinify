@@ -92,7 +92,7 @@ class DomainsApiController extends ControllerBase
             document.updatedAt = new Date();
             
             // update document in mongodb
-            await DomainRepository.update(domain);
+            await DomainRepository.update(document);
 
             res.json({
                 success: true,
@@ -125,7 +125,7 @@ class DomainsApiController extends ControllerBase
             document.updatedAt = new Date();
             
             // update document in mongodb
-            await DomainRepository.update(domain);
+            await DomainRepository.update(document);
 
             res.json({
                 success: true,
