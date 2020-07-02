@@ -38,7 +38,7 @@ class DomainsApiController extends ControllerBase
                 res.json({
                     success: false,
                     result: `Domain ${domain} already exists.`
-                });
+                }).status(500);
                 //throw new Error(`Domain ${domain} already exists.`); 
             });
         } catch (error) {
