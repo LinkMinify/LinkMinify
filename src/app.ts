@@ -3,7 +3,10 @@ import { Application, Request, Response, NextFunction } from 'express';
 import * as mongoose from 'mongoose';
 import * as morgan from 'morgan';
 import { ControllerBase } from './controllers/ControllerBase';
+
+// front end controllers
 import HomeController from './controllers/HomeController';
+import LinksController from './controllers/LinksController';
 
 // api routes
 import DomainsApiController from './controllers/api/DomainsApiController';
@@ -26,7 +29,7 @@ class App {
         this.registerMiddleware();
 
         // register frontend controllers
-        this.registerControllers();
+        this.registerFrontendControllers();
 
         // register api controllers
         this.registerApiControllers();
@@ -65,7 +68,7 @@ class App {
         this.app.use(express.json());
     }
 
-    private registerControllers() {
+    private registerFrontendControllers() {
         this.registerController(new HomeController());
     }
 
