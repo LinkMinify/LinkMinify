@@ -30,15 +30,19 @@ class DomainsApiController extends ControllerBase
             await DomainModel.create({
                 domain: domain
             }).then(() => {
-                return res.json({
+                res.json({
                     success: true,
                     result: 'Successfully added domain ' + domain
                 });
             }).catch(() => { 
-                throw new Error(`Domain ${domain} already exists.`); 
+                res.json({
+                    success: false,
+                    result: `Domain ${domain} already exists.`
+                });
+                //throw new Error(`Domain ${domain} already exists.`); 
             });
         } catch (error) {
-            return next(error);
+            next(error);
             //console.log(error);
         }
     }
