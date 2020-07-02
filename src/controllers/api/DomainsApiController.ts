@@ -1,5 +1,6 @@
 import { DomainModel } from '../../models/domain';
 import { ControllerBase } from '../ControllerBase';
+import { DomainRepository } from '../../repository/DomainRepository';
 import { Request, Response, NextFunction } from 'express';
 import * as yup from 'yup';
 
@@ -11,7 +12,21 @@ class DomainsApiController extends ControllerBase
     }
 
     public initRoutes(): void {
+        this.router.get(this.path, this.all);
         this.router.post(this.path, this.create);
+    }
+
+    public async all(req: Request, res: Response) {
+        let domains = DomainRepository.getEnabledDomains();
+
+        if (domains == null) {
+            res.json({
+                success: false,
+                result: 'No domains found'
+            }).status(500);
+        }
+
+        res.json(domains);
     }
 
     public async create(req: Request, res: Response, next: NextFunction) {
@@ -46,6 +61,7 @@ class DomainsApiController extends ControllerBase
             //console.log(error);
         }
     }
+
 }
 
 export default DomainsApiController;
