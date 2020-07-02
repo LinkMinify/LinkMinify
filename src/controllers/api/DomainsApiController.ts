@@ -19,17 +19,17 @@ class DomainsApiController extends ControllerBase
 
     public async all(req: Request, res: Response, next: NextFunction) {
         try {
-            let domains = DomainRepository.getEnabledDomains();
+            let domains = await DomainRepository.getEnabledDomains();
 
             if (domains == null) {
                 throw new Error('No domains found.');
             }
 
-            console.log(domains); // log results to console
+            console.log(domains); // log results to
 
             res.json({
                 success: true,
-                domains: []
+                domains: domains.entries()
             });
         } catch(error) {
             next(error);

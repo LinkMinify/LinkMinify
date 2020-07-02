@@ -5,8 +5,8 @@ import { DocumentType } from '@typegoose/typegoose';
 
 export class DomainRepository {
     
-    public static getEnabledDomains(): DocumentQuery<DocumentType<Domain>[], DocumentType<Domain>, {}> | null {
-        let domains = DomainModel.find({ enabled: true });
+    public static getEnabledDomains(): Promise<DocumentType<Domain>[]> | null {
+        let domains = DomainModel.find({ enabled: true }).exec();
 
         // if we didn't find any enabled domains, return null
         if (domains == null) {
@@ -16,15 +16,15 @@ export class DomainRepository {
         return domains;
     }
 
-    public static findByDomain(domainName: string): DocumentQuery<DocumentType<Domain>, DocumentType<Domain>, {}> | null {
-        let domain = DomainModel.findOne({ domain: domainName });
+    public static findByDomain(domain: string): Promise<DocumentType<Domain>> | null {
+        let document = DomainModel.findOne({ domain: domain }).exec();
         
         // if we didn't find a domain, return null
-        if (domain == null) {
+        if (document == null) {
             return null;
         }
 
-        return domain;
+        return document;
     }
 
 }
