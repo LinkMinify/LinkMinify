@@ -31,6 +31,9 @@ class App {
         // register api controllers
         this.registerApiControllers();
 
+        // finally, register our error handler
+        this.registerErrorHandler();
+
         // listen
         this.listen();
     }
@@ -60,19 +63,6 @@ class App {
     private registerMiddleware() {
         this.app.use(morgan('common'));
         this.app.use(express.json());
-
-        this.app.use((error: any, req: Request, res: Response, next: NextFunction) => {
-            if (error.status) {
-                res.status(error.status);
-            } else {
-                res.status(500);
-            }
-            
-            res.json({
-                success: false,
-                result: error.message
-            });
-        });
     }
 
     private registerControllers() {
@@ -85,6 +75,21 @@ class App {
 
     private registerController(controller: ControllerBase) {
         this.app.use('/', controller.router);
+    }
+
+    private registerErrorHandler() {
+        this.app.use((error: any, req: Request, res: Response, next: NextFunction) => {
+            if (error.status) {
+                res.status(error.status);
+            } else {
+                res.status(500);
+            }
+            
+            res.json({
+                success: false,
+                result: error.message
+            });
+        });
     }
 
     private listen() {
