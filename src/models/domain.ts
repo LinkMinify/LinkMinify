@@ -9,10 +9,10 @@ export class Domain {
     @prop({ default: true })
     public enabled?: boolean;
 
-    @prop({ default: new Date() })
+    @prop({ default: Date.now })
     public createdAt?: Date;
 
-    @prop({ default: new Date() })
+    @prop({ default: Date.now })
     public updatedAt?: Date;
 }
 
