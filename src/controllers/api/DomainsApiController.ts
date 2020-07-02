@@ -3,6 +3,7 @@ import { ControllerBase } from '../ControllerBase';
 import { DomainRepository } from '../../repository/DomainRepository';
 import { Request, Response, NextFunction } from 'express';
 import * as yup from 'yup';
+import { domain } from 'process';
 
 class DomainsApiController extends ControllerBase
 {
@@ -16,17 +17,23 @@ class DomainsApiController extends ControllerBase
         this.router.post(this.path, this.create);
     }
 
-    public async all(req: Request, res: Response) {
-        let domains = DomainRepository.getEnabledDomains();
+    public async all(req: Request, res: Response, next: NextFunction) {
+        try {
+            let domains = DomainRepository.getEnabledDomains();
 
-        if (domains == null) {
+            if (domains == null) {
+                throw new Error('No domains found.');
+            }
+
+            console.log(domains); // log results to console
+
             res.json({
-                success: false,
-                result: 'No domains found'
-            }).status(500);
+                success: true,
+                domains: []
+            });
+        } catch(error) {
+            next(error);
         }
-
-        res.json(domains);
     }
 
     public async create(req: Request, res: Response, next: NextFunction) {
