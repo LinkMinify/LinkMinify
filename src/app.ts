@@ -70,6 +70,7 @@ class App {
 
     private registerFrontendControllers() {
         this.registerController(new HomeController());
+        this.registerController(new LinksController());
     }
 
     private registerApiControllers() {
