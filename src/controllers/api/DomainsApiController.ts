@@ -25,11 +25,14 @@ class DomainsApiController extends ControllerBase
                 throw new Error('No domains found.');
             }
 
-            console.log(domains); // log results to
+            let enabledDomains = [];
+            domains.forEach((domain) => {
+                enabledDomains.push(domain.domain);
+            });
 
             res.json({
                 success: true,
-                domains: domains.entries()
+                domains: enabledDomains
             });
         } catch(error) {
             next(error);
