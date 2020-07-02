@@ -93,6 +93,11 @@ class DomainsApiController extends ControllerBase
             
             // update document in mongodb
             await DomainRepository.update(domain);
+
+            res.json({
+                success: true,
+                result: `Successfully disabled the domain ${domain}`
+            });
         } catch (error) {
             next(error);
         }
@@ -121,6 +126,11 @@ class DomainsApiController extends ControllerBase
             
             // update document in mongodb
             await DomainRepository.update(domain);
+
+            res.json({
+                success: true,
+                result: `Successfully enabled the domain ${domain}`
+            });
         } catch (error) {
             next(error);
         }
