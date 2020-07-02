@@ -31,6 +31,7 @@ class DomainsApiController extends ControllerBase
             await validator.validate({
                 domain: domain
             }).then(async (valid) => {    
+            
                 // finally, save the new domain to the database
                 let document = await DomainModel.create({
                     domain: valid.domain,
@@ -41,7 +42,9 @@ class DomainsApiController extends ControllerBase
                         success: true,
                         result: 'Successfully added domain ' + domain
                     });
-                }).catch(() => { new Error(`Domain ${valid.domain} already exists.`); });
+                }).catch(() => { 
+                    throw new Error(`Domain ${valid.domain} already exists.`); 
+                });
             });            
         } catch (error) {
             next(error);
