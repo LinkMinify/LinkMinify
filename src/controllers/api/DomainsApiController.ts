@@ -15,6 +15,8 @@ class DomainsApiController extends ControllerBase
     public initRoutes(): void {
         this.router.get(this.path, this.all);
         this.router.post(this.path, this.create);
+        this.router.post(this.path + '/disable', this.disable);
+        this.router.post(this.path + '/enable', this.enable);
     }
 
     public async all(req: Request, res: Response, next: NextFunction) {
@@ -69,6 +71,62 @@ class DomainsApiController extends ControllerBase
         } catch (error) {
             next(error);
             //console.log(error);
+        }
+    }
+
+    public async disable(req: Request, res: Response, next: NextFunction) {
+        const { domain } = req.body;
+
+        const validator = yup.object().shape({
+            domain: yup.string().required()
+        });
+
+        try {
+            await validator.validate({
+                domain: domain
+            })
+
+            let document = await DomainRepository.findByDomain(domain); 
+
+            if (document == null) {
+                throw new Error("Invalid domain.");
+            }
+
+            document.enabled = false;
+            document.updatedAt = new Date();
+            
+            // update document in mongodb
+            await DomainRepository.update(domain);
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    public async enable(req: Request, res: Response, next: NextFunction) {
+        const { domain } = req.body;
+
+        const validator = yup.object().shape({
+            domain: yup.string().required()
+        });
+
+        try {
+            await validator.validate({
+                domain: domain
+            })
+
+            let document = await DomainRepository.findByDomain(domain); 
+
+            if (document == null) {
+                throw new Error("Invalid domain.");
+            }
+
+            document.enabled = true;
+            document.updatedAt = new Date();
+            
+            // update document in mongodb
+            await DomainRepository.update(domain);
+        } catch (error) {
+            next(error);
         }
     }
 

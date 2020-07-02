@@ -1,3 +1,4 @@
+import { domain } from 'process';
 import { RepositoryBase } from './RepositoryBase';
 import { Domain, DomainModel } from '../models/domain';
 import { DocumentQuery } from 'mongoose';
@@ -25,6 +26,10 @@ export class DomainRepository {
         }
 
         return document;
+    }
+
+    public static update(domain: Domain) {
+        DomainModel.updateOne({ domain: domain.domain }, domain);
     }
 
 }
