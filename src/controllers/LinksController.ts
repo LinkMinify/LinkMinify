@@ -12,7 +12,7 @@ class LinksController extends ControllerBase {
     }
 
     public async processSlug(req: Request, res: Response, next: NextFunction) {
-        console.log(req.hostname);
+        res.send(req.hostname);
         next();
     }
 
