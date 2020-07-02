@@ -61,13 +61,13 @@ class App {
         this.app.use(morgan('common'));
         this.app.use(express.json());
 
-        this.app.use((error, req: Request, res: Response, next: NextFunction) => {
+        this.app.use((error: any, req: Request, res: Response, next: NextFunction) => {
             if (error.status) {
                 res.status(error.status);
             } else {
                 res.status(500);
             }
-
+            
             res.json({
                 success: false,
                 result: error.message
