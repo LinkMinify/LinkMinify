@@ -1,4 +1,5 @@
 import { prop, index, getModelForClass } from '@typegoose/typegoose';
+import * as mongoose from 'mongoose';
 
 @index({ username: 1, email: 1 }, { unique: true })
 export class User {
@@ -24,4 +25,9 @@ export class User {
     public updatedAt: Date;
 }
 
-export const UserModel = getModelForClass(User);
+export const UserModel = getModelForClass(User, {
+    existingMongoose: mongoose,
+    schemaOptions: {
+        collection: 'users'
+    }
+});

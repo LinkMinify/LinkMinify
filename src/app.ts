@@ -10,6 +10,7 @@ import LinksController from './controllers/LinksController';
 
 // api routes
 import DomainsApiController from './controllers/api/DomainsApiController';
+import LinksApiController from './controllers/api/LinksApiController';
 
 class App {
     public app: Application;
@@ -75,6 +76,7 @@ class App {
 
     private registerApiControllers() {
         this.registerController(new DomainsApiController());
+        this.registerController(new LinksApiController());
     }
 
     private registerController(controller: ControllerBase) {

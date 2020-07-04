@@ -3,7 +3,6 @@ import { ControllerBase } from '../ControllerBase';
 import { DomainRepository } from '../../repository/DomainRepository';
 import { Request, Response, NextFunction } from 'express';
 import * as yup from 'yup';
-import { domain } from 'process';
 
 class DomainsApiController extends ControllerBase
 {
