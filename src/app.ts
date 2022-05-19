@@ -45,9 +45,7 @@ class App {
     private initDatabae() {
         // connect to mongo db
         try {
-            mongoose.connect(process.env.MONGODB_URI, {
-                useNewUrlParser: true
-            });
+            mongoose.connect(process.env.MONGODB_URI);
 
             mongoose.connection.on('connected', () => {
                 console.log('Connected to mongodb');

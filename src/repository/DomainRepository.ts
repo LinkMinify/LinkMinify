@@ -1,7 +1,4 @@
-import { domain } from 'process';
-import { RepositoryBase } from './RepositoryBase';
 import { Domain, DomainModel } from '../models/domain';
-import { DocumentQuery } from 'mongoose';
 import { DocumentType } from '@typegoose/typegoose';
 
 export class DomainRepository {

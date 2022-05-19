@@ -1,4 +1,3 @@
-import { Link } from './../../models/link';
 import { ControllerBase } from '../ControllerBase';
 import { Request, Response, NextFunction } from 'express';
 import { Link, LinkClicks, LinkModel } from '../../models/link';
