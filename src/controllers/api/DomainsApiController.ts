@@ -28,7 +28,9 @@ class DomainsApiController extends ControllerBase
 
             let enabledDomains = [];
             domains.forEach((domain) => {
-                enabledDomains.push(domain.domain);
+                if (domain.enabled) {
+                    enabledDomains.push(domain.domain);
+                }
             });
 
             res.json({
