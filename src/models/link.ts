@@ -10,7 +10,7 @@ export class LinkClicks {
 
 @index({ slug: 1 }, { unique: true })
 export class Link {
-    @prop({ ref: Domain })
+    @prop({ ref: () => Domain })
     public domain: Ref<Domain>;
 
     @prop({ required: true })
@@ -19,10 +19,10 @@ export class Link {
     @prop({ required: true })
     public url: string;
 
-    @prop()
+    @prop({ type: () => LinkClicks })
     public link_clicks?: LinkClicks[];
 
-    @prop({ ref: User })
+    @prop({ ref: () => User })
     public createdBy?: Ref<User>;
 
     @prop({ default: Date.now })

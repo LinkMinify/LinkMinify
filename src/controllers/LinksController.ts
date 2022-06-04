@@ -1,5 +1,8 @@
 import { ControllerBase } from './ControllerBase';
 import { Request, Response, NextFunction } from 'express';
+import { LinkRepository } from '../repository/LinkRepository';
+import { DomainRepository } from '../repository/DomainRepository';
+import { Domain, DomainModel } from '../models/domain';
 
 class LinksController extends ControllerBase {
 
@@ -12,8 +15,30 @@ class LinksController extends ControllerBase {
     }
 
     public async processSlug(req: Request, res: Response, next: NextFunction) {
-        res.send(req.hostname);
-        console.log(req.hostname);
+        let { slug } = req.params;
+
+        let hostname = req.hostname;
+
+        // attempt to get the link
+        let link = await LinkRepository.findBySlug(slug);
+
+        if (link == null) {
+            res.status(404).send('Invalid link');
+            return;
+        }
+
+        // validate the domain
+        let domain = link.domain as Domain;
+
+        console.log(domain.domain);
+    
+        if (hostname != domain.domain) {
+            res.status(404).send("Invalid link");
+            return;
+        }
+        
+        // redirect if we made it this far
+        res.redirect(link.url);
         next();
     }
 
