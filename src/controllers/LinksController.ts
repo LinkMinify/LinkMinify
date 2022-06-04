@@ -30,8 +30,6 @@ class LinksController extends ControllerBase {
         // validate the domain
         let domain = link.domain as Domain;
 
-        console.log(domain.domain);
-    
         if (hostname != domain.domain) {
             res.status(404).send("Invalid link");
             return;
